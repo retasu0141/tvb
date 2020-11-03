@@ -86,7 +86,7 @@ def Vcheck(ID,v_text):
 
     #speaker,pitch,speed
     speaker_number,pitch,speed = V_setting()
-    cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
+    cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
     voicetext2(str(ID),speaker_number,pitch,speed,v_text)
     return #ID,speaker,pitch,speed
@@ -122,11 +122,11 @@ def seve(ID,text):
             print(row[0])
             if row[0] == str(ID):
                 print(row)
-                cur.execute("UPDATE db SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
+                cur.execute("UPDATE db SET text = '{text}' WHERE ID_ ='{ID}';".format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
-        cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker='hoge',pitch='hoge',speed='hoge',text=text))
+        cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker='hoge',pitch='hoge',speed='hoge',text=text))
         conn.commit()
         return
     except Exception as e:
