@@ -100,7 +100,7 @@ def Gcheck(ID):
     print(ID)
     for row in cur:
         print(row)
-        if row == ID:
+        if row[0] == ID:
             print(row[4])
             return row[4]
     '''
@@ -120,7 +120,7 @@ def seve(ID,text):
         conn.commit()
         cur.execute('SELECT * FROM db')
         for row in cur:
-            if row == ID:
+            if row[0] == ID:
                 print(row)
                 cur.execute("UPDATE db SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
                 conn.commit()
