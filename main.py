@@ -49,7 +49,7 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 	#print(speaker)
 	payload = {
 	    'text': text,
-	    'speaker': speaker,
+	    'speaker': speaker_,
 	    'format':'mp3',
 	    'volume':'150',
         'pitch':pitch,
@@ -257,8 +257,8 @@ async def k(ctx,text : str):
     voice_client.play(ffmpeg_audio_source)
 
 
-        #message.author.id
-        #message.guild
+@bot.command()
+async def t(ctx,left : str, right : str):
 
 
 bot.run(token)
