@@ -120,13 +120,14 @@ def seve(ID,text):
         conn.commit()
         cur.execute('SELECT * FROM db')
         for row in cur:
+            print(row[0])
             if row[0] == ID:
                 print(row)
                 cur.execute("UPDATE db SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
-        cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker='',pitch='',speed='',text=text))
+        cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker='hoge',pitch='hoge',speed='hoge',text=text))
         conn.commit()
         return
     except Exception as e:
