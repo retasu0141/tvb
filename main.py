@@ -27,23 +27,23 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 		#男01
 
 	if speaker_number == '1':
-		speaker = 'takeru'
+		speaker_ = 'takeru'
 		#男02
 
 	elif speaker_number == '2':
-		speaker = 'haruka'
+		speaker_ = 'haruka'
 		#女01
 
 	elif speaker_number == '3':
-		speaker = 'hikari'
+		speaker_ = 'hikari'
 		#女02
 
 	elif speaker_number == '4':
-		speaker = 'santa'
+		speaker_ = 'santa'
 		#サンタ
 
 	elif speaker_number == '5':
-		speaker = 'bear'
+		speaker_ = 'bear'
 		#クマ
 
 	#print(speaker)
