@@ -257,8 +257,7 @@ async def k(ctx,text : str):
     voice_client.play(ffmpeg_audio_source)
 
 
-@bot.command()
-async def t(ctx,left : str, right : str):
+
 
 
 bot.run(token)
