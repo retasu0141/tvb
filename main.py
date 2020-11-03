@@ -66,7 +66,7 @@ def V_setting():
     speaker_number = random.randint(1, 5)
     pitch = random.randint(50, 200)
     speed = random.randint(70, 300)
-    return speaker,pitch,speed
+    return speaker_number,pitch,speed
 
 def get_connection():
     dsn = os.environ.get('DATABASE_URL')
