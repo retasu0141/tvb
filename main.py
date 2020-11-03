@@ -100,8 +100,7 @@ def Gcheck(ID):
     print(ID)
     for row in cur:
         print(row[0])
-        if row[0] == ID:
-            print(row[4])
+        if row[0] == '773274758124142624':
             return row[4]
     '''
     text = 'true'
