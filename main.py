@@ -222,7 +222,10 @@ async def on_message(message):
     if text == 'true':
         Vcheck(message.author.id,message.content)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
-        voice_client.play(ffmpeg_audio_source)
+        try:
+            voice_client.play(ffmpeg_audio_source)
+        except:
+            await bot.process_commands(message)
     await bot.process_commands(message)
 
 @bot.command(aliases=["connect","come"]) #connectやsummonでも呼び出せる
