@@ -63,7 +63,7 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 	result.close()
 
 def V_setting():
-    speaker = random.randint(1, 5)
+    speaker_number = random.randint(1, 5)
     pitch = random.randint(50, 200)
     speed = random.randint(70, 300)
     return speaker,pitch,speed
@@ -85,10 +85,10 @@ def Vcheck(ID,v_text):
             return #row[0],row[1],row[2],row[3]
 
     #speaker,pitch,speed
-    speaker,pitch,speed = V_setting()
+    speaker_number,pitch,speed = V_setting()
     cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
-    voicetext2(ID,speaker,pitch,speed,v_text)
+    voicetext2(str(ID),speaker_number,pitch,speed,v_text)
     return #ID,speaker,pitch,speed
 
 def Gcheck(ID):
@@ -198,7 +198,7 @@ async def on_message(message):
     print(text)
     if text == 'true':
         Vcheck(message.author.id,message.content)
-        ffmpeg_audio_source = discord.FFmpegPCMAudio(message.author.id+".mp3")
+        ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
     await bot.process_commands(message)
 
 @bot.command(aliases=["connect","come"]) #connectやsummonでも呼び出せる
