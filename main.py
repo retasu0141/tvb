@@ -98,6 +98,7 @@ def Gcheck(ID):
     conn.commit()
     cur.execute('SELECT * FROM db')
     print(ID)
+    print(cur)
     for row in cur:
         if ID in row:
             print(row[4])
