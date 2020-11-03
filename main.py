@@ -97,10 +97,11 @@ def Gcheck(ID):
     cur.execute("ROLLBACK")
     conn.commit()
     cur.execute('SELECT * FROM db')
-
+    print(ID)
     for row in cur:
         if ID in row:
-            return row[0],row[4]
+            print(row[4])
+            return row[4]
     '''
     text = 'true'
     cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker='',pitch='',speed='',text=text))
@@ -109,6 +110,7 @@ def Gcheck(ID):
     '''
 
 def seve(ID,text):
+    print(ID)
     #ID=ユーザーID URL=youtube_url
     try:
         conn = get_connection()
