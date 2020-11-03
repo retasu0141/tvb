@@ -6,7 +6,7 @@ import requests
 import os
 
 bot = commands.Bot(command_prefix="!")
-token = 'NzczMTc2MTAxMDQ4NTQ5Mzk3.X6FaWw.VWXeurf86AnpyYeYkEapo1pjT4Q'
+token = os.environ['DISCORD_BOT_TOKEN']
 
 
 def voicetext(text,speaker_number):
