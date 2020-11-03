@@ -250,8 +250,6 @@ async def on_message(message):
         Vcheck(message.author.id,message.content)
         bot.send(message.channel, msg)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(message.author.id+".mp3")
-    elif text != 'true':
-        await bot.send(message.channel,'読み上げ開始をしてください\nコマンドは !start　です')
 
         #message.author.id
         #message.guild
