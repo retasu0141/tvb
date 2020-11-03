@@ -62,7 +62,7 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 	result.write(send.content)
 	result.close()
 
-def random():
+def V_setting():
     speaker = random.randint(1, 5)
     pitch = random.randint(50, 200)
     speed = random.randint(70, 300)
@@ -85,7 +85,7 @@ def Vcheck(ID,v_text):
             return #row[0],row[1],row[2],row[3]
 
     #speaker,pitch,speed
-    speaker,pitch,speed = random()
+    speaker,pitch,speed = V_setting()
     cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
     voicetext2(ID,speaker,pitch,speed,v_text)
@@ -120,7 +120,7 @@ def seve(ID,text):
         cur.execute('SELECT * FROM db')
         for row in cur:
             print(row[0])
-            if row[0] == ID:
+            if row[0] == str(ID):
                 print(row)
                 cur.execute("UPDATE db SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
                 conn.commit()
