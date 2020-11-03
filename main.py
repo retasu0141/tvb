@@ -191,7 +191,7 @@ async def on_message(message):
         return
     print('Gcheck')
     voice_client = message.guild.voice_client
-    text = Gcheck(message.channel)
+    text = Gcheck(message.channel.id)
     print(text)
     if text == 'true':
         Vcheck(message.author.id,message.content)
@@ -228,13 +228,13 @@ async def leave(ctx):
 @bot.command()
 async def start(ctx):
     """読み上げを開始します"""
-    seve(ctx.channel,'true')
+    seve(ctx.channel.id,'true')
     await ctx.send("読み上げを開始します")
 
 @bot.command()
 async def stop(ctx):
     """読み上げを停止します"""
-    seve(ctx.channel,'false')
+    seve(ctx.channel.id,'false')
     await ctx.send("読み上げを停止します")
 
 @bot.command()
