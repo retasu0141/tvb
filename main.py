@@ -86,7 +86,7 @@ def Vcheck(ID,v_text):
 
     #speaker,pitch,speed
     speaker,pitch,speed = random()
-    cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker=speaker,pitch=pitch,speed=speed,text=''))
+    cur.execute("insert into db values('{ID}','{speaker}','{pitch}','{speed}','{text}')".format(ID=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
     voicetext2(ID,speaker,pitch,speed,v_text)
     return #ID,speaker,pitch,speed
@@ -99,7 +99,7 @@ def Gcheck(ID):
     cur.execute('SELECT * FROM db')
     print(ID)
     for row in cur:
-        print(row)
+        print(row[0])
         if row[0] == ID:
             print(row[4])
             return row[4]
