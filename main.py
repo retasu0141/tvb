@@ -9,8 +9,9 @@ token = os.environ['DISCORD_BOT_TOKEN']
 
 if not discord.opus.is_loaded():
     #もし未ロードだったら
-    discord.opus.load_opus("heroku-buildpack-libopus")
-    discord.opus.load_opus("heroku-buildpack-ffmpeg-latest.git")
+    discord.opus.load_opus('opus')
+    discord.opus.load_opus("buildpack-libopus")
+    discord.opus.load_opus("buildpack-ffmpeg-latest")
 
 def voicetext(text,speaker_number):
 	#print(speaker_number)
