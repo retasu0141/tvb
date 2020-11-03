@@ -86,7 +86,7 @@ def Vcheck(ID,v_text):
 
     #speaker,pitch,speed
     speaker_number,pitch,speed = V_setting()
-    cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
+    cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker_number,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
     voicetext2(str(ID),speaker_number,pitch,speed,v_text)
     return #ID,speaker,pitch,speed
