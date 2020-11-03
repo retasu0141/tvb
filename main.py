@@ -115,11 +115,11 @@ def seve(ID,text):
         cur = conn.cursor()
         cur.execute("ROLLBACK")
         conn.commit()
-        cur.execute('SELECT * FROM ydb')
+        cur.execute('SELECT * FROM db')
         for row in cur:
             if ID in row:
                 print(row)
-                cur.execute("UPDATE ydb SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
+                cur.execute("UPDATE db SET text = '{text}' WHERE ID='{ID}';".format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
