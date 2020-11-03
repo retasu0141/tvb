@@ -189,11 +189,12 @@ async def on_message(message):
     # メッセージの送信者がbotだった場合は無視する
     if message.author.bot:
         return
+    print('Gcheck')
     voice_client = message.guild.voice_client
     text = Gcheck(message.channel)
+    print(text)
     if text == 'true':
         Vcheck(message.author.id,message.content)
-        bot.send(message.channel, msg)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(message.author.id+".mp3")
     await bot.process_commands(message)
 
