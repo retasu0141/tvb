@@ -63,9 +63,9 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 	result.close()
 
 def random():
-    speaker = random.uniform(1, 5)
-    pitch = random.uniform(50, 200)
-    speed = random.uniform(70, 300)
+    speaker = random.randint(1, 5)
+    pitch = random.randint(50, 200)
+    speed = random.randint(70, 300)
     return speaker,pitch,speed
 
 def get_connection():
@@ -100,7 +100,7 @@ def Gcheck(ID):
     print(ID)
     for row in cur:
         print(row[0])
-        if row[0] == '773274758124142624':
+        if row[0] == str(ID):
             return row[4]
     '''
     text = 'true'
