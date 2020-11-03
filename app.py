@@ -20,7 +20,7 @@ class Entry(db.Model):
     __tablename__ = "db"
 
     # カラムを定義
-    ID_ = db.Column(db.String(), nullable=False, primary_key=True)
+    _ = db.Column(db.String(), nullable=False, primary_key=True)
     speaker = db.Column(db.String(), nullable=False, primary_key=True)
     pitch = db.Column(db.String(), nullable=False, primary_key=True)
     speed = db.Column(db.String(), nullable=False, primary_key=True)
