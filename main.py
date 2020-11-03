@@ -6,13 +6,13 @@ import os
 
 bot = commands.Bot(command_prefix="!")
 token = os.environ['DISCORD_BOT_TOKEN']
-
+'''
 if not discord.opus.is_loaded():
     #もし未ロードだったら
     discord.opus.load_opus('heroku-opus')
     discord.opus.load_opus("heroku-buildpack-libopus")
     discord.opus.load_opus("heroku-buildpack-ffmpeg-latest")
-
+'''
 def voicetext(text,speaker_number):
 	#print(speaker_number)
 	url = 'https://api.voicetext.jp/v1/tts'
