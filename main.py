@@ -291,7 +291,7 @@ async def s(ctx,speaker : str,pitch : str,speed : str):
     await ctx.send("設定しました")
 
 @bot.command()
-async def r(ctx,speaker : str,pitch : str,speed : str):
+async def r(ctx):
     """話者,ピッチ,スピードをランダムで決定します"""
     speaker_number,pitch,speed = V_setting()
     seve2(ctx.message.author.id,speaker_number,pitch,speed)
