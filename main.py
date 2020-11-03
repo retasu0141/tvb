@@ -80,7 +80,7 @@ def Vcheck(ID,v_text):
     cur.execute('SELECT * FROM db')
 
     for row in cur:
-        if ID in row:
+        if str(ID) in row:
             voicetext2(row[0],row[1],row[2],row[3],v_text)
             return #row[0],row[1],row[2],row[3]
 
