@@ -111,7 +111,6 @@ def Gcheck(ID):
 
 def seve(ID,text):
     print(ID)
-    #ID=ユーザーID URL=youtube_url
     try:
         conn = get_connection()
         cur = conn.cursor()
@@ -122,11 +121,35 @@ def seve(ID,text):
             print(row[0])
             if row[0] == str(ID):
                 print(row)
-                cur.execute("UPDATE db SET text = '{text}' WHERE ID_ ='{ID}';".format(text=text,ID=ID))
+                cur.execute("UPDATE db SET text = '{text}' WHERE id_ ='{ID}';".format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
         cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker='hoge',pitch='hoge',speed='hoge',text=text))
+        conn.commit()
+        return
+    except Exception as e:
+        print (str(e))
+        return
+
+
+def seve2(ID,speaker,pitch,speed):
+    print(ID)
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("ROLLBACK")
+        conn.commit()
+        cur.execute('SELECT * FROM db')
+        for row in cur:
+            print(row[0])
+            if row[0] == str(ID):
+                print(row)
+                cur.execute("UPDATE db SET speaker = '{speaker}', pitch = '{pitch}', speed = '{speed}'  WHERE id_ ='{ID}';".format(speaker=speaker,pitch=pitch,speed=speed,ID=ID))
+                conn.commit()
+                return
+        #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
+        cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
         conn.commit()
         return
     except Exception as e:
@@ -257,6 +280,11 @@ async def k(ctx,text : str):
     voice_client.play(ffmpeg_audio_source)
 
 
+@bot.command()
+async def s(ctx,speaker : str,pitch : str,speed : str):
+    """話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します\n例 !s 1 100 150 """
+    seve2(ctx.message.author.id,speaker,pitch,speed)
+    await ctx.send("設定しました")
 
 
 
