@@ -286,7 +286,7 @@ async def k(ctx,text : str):
 
 @bot.command()
 async def s(ctx,speaker : str,pitch : str,speed : str):
-    """話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します\n例 !s 1 100 150 """
+    """話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します 例 !s 1 100 150 """
     seve2(ctx.message.author.id,speaker,pitch,speed)
     await ctx.send("設定しました")
 
