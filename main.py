@@ -121,7 +121,7 @@ def seve(ID,text):
             print(row[0])
             if row[0] == str(ID):
                 print(row)
-                cur.execute("UPDATE db SET text = '{text}' WHERE id_ ='{ID}';".format(text=text,ID=ID))
+                cur.execute('''UPDATE db SET text = '{text}' WHERE id_ ='{ID};'''.format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
@@ -145,7 +145,7 @@ def seve2(ID,speaker,pitch,speed):
             print(row[0])
             if row[0] == str(ID):
                 print(row)
-                cur.execute("UPDATE db SET speaker = '{speaker}', pitch = '{pitch}', speed = '{speed}'  WHERE id_ ='{ID}';".format(speaker=speaker,pitch=pitch,speed=speed,ID=ID))
+                cur.execute('''UPDATE db SET speaker = '{speaker}', pitch = '{pitch}', speed = '{speed}'  WHERE id_ ='{ID}';'''.format(speaker=speaker,pitch=pitch,speed=speed,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
@@ -222,6 +222,7 @@ async def on_message(message):
     if text == 'true':
         Vcheck(message.author.id,message.content)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
+        voice_client.play(ffmpeg_audio_source)
     await bot.process_commands(message)
 
 @bot.command(aliases=["connect","come"]) #connectやsummonでも呼び出せる
