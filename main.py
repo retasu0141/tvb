@@ -184,6 +184,19 @@ def voicetext(text,speaker_number):
 async def on_ready():
     print('Botを起動しました。')
 
+@bot.event
+async def on_message(message):
+    # メッセージの送信者がbotだった場合は無視する
+    if message.author.bot:
+        return
+    voice_client = message.guild.voice_client
+    text = Gcheck(message.channel)
+    if text == 'true':
+        Vcheck(message.author.id,message.content)
+        bot.send(message.channel, msg)
+        ffmpeg_audio_source = discord.FFmpegPCMAudio(message.author.id+".mp3")
+    await bot.process_commands(message)
+
 @bot.command(aliases=["connect","come"]) #connectやsummonでも呼び出せる
 async def join(ctx):
     """Botをボイスチャンネルに入室させます。"""
@@ -239,17 +252,6 @@ async def k(ctx,text : str):
     ffmpeg_audio_source = discord.FFmpegPCMAudio("voice.mp3")
     voice_client.play(ffmpeg_audio_source)
 
-@bot.event
-async def on_message(message):
-    # メッセージの送信者がbotだった場合は無視する
-    if message.author.bot:
-        return
-    voice_client = message.guild.voice_client
-    text = Gcheck(message.channel)
-    if text == 'true':
-        Vcheck(message.author.id,message.content)
-        bot.send(message.channel, msg)
-        ffmpeg_audio_source = discord.FFmpegPCMAudio(message.author.id+".mp3")
 
         #message.author.id
         #message.guild
