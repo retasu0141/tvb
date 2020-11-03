@@ -121,7 +121,7 @@ def seve(ID,text):
             print(row[0])
             if row[0] == str(ID):
                 print(row)
-                cur.execute('''UPDATE db SET text = '{text}' WHERE id_ ='{ID};'''.format(text=text,ID=ID))
+                cur.execute('''UPDATE db SET text = '{text}' WHERE id_ ='{ID}';'''.format(text=text,ID=ID))
                 conn.commit()
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
