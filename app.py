@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, g
 from hamlish_jinja import HamlishExtension
-from werkzeug.security import ImmutableDict
+from werkzeug import ImmutableDict
 from flask_sqlalchemy import SQLAlchemy
 
 class FlaskWithHamlish(Flask):
