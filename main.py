@@ -7,7 +7,7 @@ import os
 import psycopg2
 import random
 
-bot = commands.Bot(command_prefix="/")
+bot = commands.Bot(command_prefix="/",activity=discord.Game("/help でコマンド確認！"))
 bot.remove_command('help')
 token = os.environ['DISCORD_BOT_TOKEN']
 
