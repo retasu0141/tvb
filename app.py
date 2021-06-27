@@ -10,7 +10,7 @@ class FlaskWithHamlish(Flask):
     )
 app = FlaskWithHamlish(__name__)
 
-db_uri = os.environ.get('DATABASE_URL')
+db_uri = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
