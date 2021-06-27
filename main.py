@@ -74,8 +74,10 @@ def get_connection():
     return psycopg2.connect(dsn)
 
 def Vcheck(ID,v_text,name):
-    print(name)
-    text = name + "さん。" + v_text
+    print(str(name))
+    str_name = str(name)
+    print(str_name[:str_name.find('＃')])
+    text = str_name[:str_name.find('＃')] + "さん。" + v_text
     print(text)
     conn = get_connection()
     cur = conn.cursor()
