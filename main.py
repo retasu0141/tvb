@@ -76,8 +76,8 @@ def get_connection():
 def Vcheck(ID,v_text,name):
     print(str(name))
     str_name = str(name)
-    print(str_name[:str_name.find('＃')])
-    text = str_name[:str_name.find('＃')] + "さん。" + v_text
+    print(str_name.split('#')[0])
+    text = str_name.split('#')[0] + "さん。" + v_text
     print(text)
     conn = get_connection()
     cur = conn.cursor()
@@ -87,7 +87,7 @@ def Vcheck(ID,v_text,name):
 
     for row in cur:
         if str(ID) in row:
-            voicetext2(row[0],row[1],row[2],row[3],v_text)
+            voicetext2(row[0],row[1],row[2],row[3],text)
             return #row[0],row[1],row[2],row[3]
 
     #speaker,pitch,speed
