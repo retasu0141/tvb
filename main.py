@@ -19,8 +19,9 @@ if not discord.opus.is_loaded():
     discord.opus.load_opus("buildpack-ffmpeg-latest")
 '''
 
-def voicetext2(ID,speaker_number,pitch,speed,text):
+def voicetext2(ID,speaker_number,pitch,speed,text,name):
 	#print(speaker_number)
+	text_ = name + "さん。" + text
 	url = 'https://api.voicetext.jp/v1/tts'
 	API_KEY = 'x5pp7y8ltm89669p'
 	#if speaker_number == '1':
@@ -49,7 +50,7 @@ def voicetext2(ID,speaker_number,pitch,speed,text):
 
 	#print(speaker)
 	payload = {
-	    'text': text,
+	    'text': text_,
 	    'speaker': speaker_,
 	    'format':'mp3',
 	    'volume':'150',
@@ -73,7 +74,7 @@ def get_connection():
     dsn = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
     return psycopg2.connect(dsn)
 
-def Vcheck(ID,v_text):
+def Vcheck(ID,v_text,name):
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("ROLLBACK")
@@ -89,7 +90,7 @@ def Vcheck(ID,v_text):
     speaker_number,pitch,speed = V_setting()
     cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker_number,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
-    voicetext2(str(ID),speaker_number,pitch,speed,v_text)
+    voicetext2(str(ID),speaker_number,pitch,speed,v_text,name)
     return #ID,speaker,pitch,speed
 
 def Gcheck(ID):
@@ -221,7 +222,9 @@ async def on_message(message):
     text = Gcheck(message.channel.id)
     print(text)
     if text == 'true':
-        Vcheck(message.author.id,message.content)
+        if "/" in message.content:
+            return	
+        Vcheck(message.author.id,message.content,message.author)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
         try:
             voice_client.play(ffmpeg_audio_source)
