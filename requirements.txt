@@ -8,3 +8,4 @@ hamlish_jinja
 werkzeug==0.16.1
 google-api-python-client
 Flask==1.0.0
+ffmpeg
