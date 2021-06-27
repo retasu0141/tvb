@@ -19,9 +19,8 @@ if not discord.opus.is_loaded():
     discord.opus.load_opus("buildpack-ffmpeg-latest")
 '''
 
-def voicetext2(ID,speaker_number,pitch,speed,text,name):
+def voicetext2(ID,speaker_number,pitch,speed,text):
 	#print(speaker_number)
-	text_ = name + "さん。" + text
 	url = 'https://api.voicetext.jp/v1/tts'
 	API_KEY = 'x5pp7y8ltm89669p'
 	#if speaker_number == '1':
@@ -50,7 +49,7 @@ def voicetext2(ID,speaker_number,pitch,speed,text,name):
 
 	#print(speaker)
 	payload = {
-	    'text': text_,
+	    'text': text,
 	    'speaker': speaker_,
 	    'format':'mp3',
 	    'volume':'150',
@@ -90,7 +89,7 @@ def Vcheck(ID,v_text,name):
     speaker_number,pitch,speed = V_setting()
     cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker_number,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
-    voicetext2(str(ID),speaker_number,pitch,speed,v_text,name)
+    voicetext2(str(ID),speaker_number,pitch,speed,name + "さん。" + v_text)
     return #ID,speaker,pitch,speed
 
 def Gcheck(ID):
@@ -222,8 +221,8 @@ async def on_message(message):
     text = Gcheck(message.channel.id)
     print(text)
     if text == 'true':
-        if "/" in message.content:
-            return	
+        if "_" in message.content:
+            await bot.process_commands(message)
         Vcheck(message.author.id,message.content,message.author)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
         try:
