@@ -74,6 +74,9 @@ def get_connection():
     return psycopg2.connect(dsn)
 
 def Vcheck(ID,v_text,name):
+    print(name)
+    text = name + "さん。" + v_text
+    print(text)
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("ROLLBACK")
@@ -89,7 +92,7 @@ def Vcheck(ID,v_text,name):
     speaker_number,pitch,speed = V_setting()
     cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker_number,pitch=pitch,speed=speed,text='hoge'))
     conn.commit()
-    voicetext2(str(ID),speaker_number,pitch,speed,name + "さん。" + v_text)
+    voicetext2(str(ID),speaker_number,pitch,speed,text)
     return #ID,speaker,pitch,speed
 
 def Gcheck(ID):
