@@ -223,6 +223,7 @@ async def on_message(message):
     if text == 'true':
         if "_" in message.content:
             await bot.process_commands(message)
+            return
         Vcheck(message.author.id,message.content,message.author)
         ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
         try:
