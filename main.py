@@ -321,6 +321,7 @@ async def help(ctx):
     embed.add_field(name="_s",value="話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します")
     embed.add_field(name="_s の例",value="_s 1 100 150 : 自分のテキスト読み上げの声を 話者1,ピッチ100,速度150 に設定します")
     embed.add_field(name="_r",value="話者,ピッチ,スピードをランダムで決定します")
+    embed.add_field(name="更新情報(2021/6/28)",value="コマンドの先頭につける記号が「!」から「_」になりました。自動読み上げ時にコマンドを読み上げなくさせ、名前読み上げ機能を付けました。")
     await ctx.send(embed=embed)
 
 
