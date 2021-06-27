@@ -70,7 +70,7 @@ def V_setting():
     return speaker_number,pitch,speed
 
 def get_connection():
-    dsn = os.environ.get('DATABASE_URL')
+    dsn = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
     return psycopg2.connect(dsn)
 
 def Vcheck(ID,v_text):
