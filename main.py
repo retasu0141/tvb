@@ -7,7 +7,7 @@ import os
 import psycopg2
 import random
 
-bot = commands.Bot(command_prefix="#",activity=discord.Game("#help でコマンド確認！"))
+bot = commands.Bot(command_prefix="_",activity=discord.Game("_help でコマンド確認！"))
 bot.remove_command('help')
 token = os.environ['DISCORD_BOT_TOKEN']
 
@@ -305,17 +305,17 @@ async def r(ctx):
 async def help(ctx):
     """コマンドの説明などを表示します"""
     embed = discord.Embed(title="TextVoiceBot Help",description="TextVoiceBotの使い方",color=discord.Colour.dark_green())
-    embed.add_field(name="#join",value="Botをボイスチャンネルに入室させます。(#connect,#comeでも使えます)")
-    embed.add_field(name="#leave",value="Botをボイスチャンネルから切断します。(#disconnect,#byeでも使えます)")
-    embed.add_field(name="#t",value="1~6の数字で話者を選択したの後にスペースを入れ喋らせたい文を入力するとボイスチャンネルで喋ります")
-    embed.add_field(name="#t の例",value="#s 1 これはテストです : この場合話者1の声で「これはテストです」と喋ります")
-    embed.add_field(name="#k",value="喋らせたい文を入力すると某k氏が喋ります")
-    embed.add_field(name="#k の例",value="#k これはテストです : 「これはテストです」とボイスチャンネルで喋ります")
-    embed.add_field(name="#start",value="コマンドを実行したテキストチャンネルの読み上げを開始します")
-    embed.add_field(name="#stop",value="コマンドを実行したテキストチャンネルの読み上げを停止します")
-    embed.add_field(name="#s",value="話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します")
-    embed.add_field(name="#s の例",value="#s 1 100 150 : 自分のテキスト読み上げの声を 話者1,ピッチ100,速度150 に設定します")
-    embed.add_field(name="#r",value="話者,ピッチ,スピードをランダムで決定します")
+    embed.add_field(name="_join",value="Botをボイスチャンネルに入室させます。(_connect,_comeでも使えます)")
+    embed.add_field(name="_leave",value="Botをボイスチャンネルから切断します。(_disconnect,_byeでも使えます)")
+    embed.add_field(name="_t",value="1~6の数字で話者を選択したの後にスペースを入れ喋らせたい文を入力するとボイスチャンネルで喋ります")
+    embed.add_field(name="_t の例",value="_s 1 これはテストです : この場合話者1の声で「これはテストです」と喋ります")
+    embed.add_field(name="_k",value="喋らせたい文を入力すると某k氏が喋ります")
+    embed.add_field(name="_k の例",value="_k これはテストです : 「これはテストです」とボイスチャンネルで喋ります")
+    embed.add_field(name="_start",value="コマンドを実行したテキストチャンネルの読み上げを開始します")
+    embed.add_field(name="_stop",value="コマンドを実行したテキストチャンネルの読み上げを停止します")
+    embed.add_field(name="_s",value="話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します")
+    embed.add_field(name="_s の例",value="_s 1 100 150 : 自分のテキスト読み上げの声を 話者1,ピッチ100,速度150 に設定します")
+    embed.add_field(name="_r",value="話者,ピッチ,スピードをランダムで決定します")
     await ctx.send(embed=embed)
 
 
