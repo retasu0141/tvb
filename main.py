@@ -98,8 +98,11 @@ def Vcheck(ID,v_text,name):
     return #ID,speaker,pitch,speed
 
 def Mcheck():
-    id_list = [id for id, v in matti_data.items() if v == 'mtrue']
-    return id_list
+    try:
+        id_list = [id for id, v in matti_data.items() if v == 'mtrue']
+        return id_list
+    except:
+        return 'none'
     """
     conn = get_connection()
     cur = conn.cursor()
@@ -116,8 +119,11 @@ def Mcheck():
     return list
     """
 def Mcheck2(ID):
-    matti = matti_data[ID]
-    return matti
+    try:
+        matti = matti_data[ID]
+        return matti
+    except:
+        return 'mfalse'
     """
     conn = get_connection()
     cur = conn.cursor()
@@ -295,13 +301,20 @@ async def on_message(message):
             print("m_start")
             mattilist = Mcheck()
             ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
-            for id in mattilist:
-                print(id)
-                voice_client = id
+            if mattilist == 'none':
+                voice_client = message.guild.voice_client
                 try:
                     voice_client.play(ffmpeg_audio_source)
                 except:
                     await bot.process_commands(message)
+            else:
+                for id in mattilist:
+                    print(id)
+                    voice_client = id
+                    try:
+                        voice_client.play(ffmpeg_audio_source)
+                    except:
+                        await bot.process_commands(message)
         else:
             voice_client = message.guild.voice_client
             ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
