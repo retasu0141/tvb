@@ -97,6 +97,32 @@ def Vcheck(ID,v_text,name):
     voicetext2(str(ID),speaker_number,pitch,speed,text)
     return #ID,speaker,pitch,speed
 
+def Mcheck():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("ROLLBACK")
+    conn.commit()
+    cur.execute('SELECT * FROM db')
+    print('mtrue')
+    list = []
+    for row in cur:
+        print(row[0])
+        if row[0] == 'mtrue':
+            list.append(row[4])
+    return list
+
+def Mcheck2(ID):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("ROLLBACK")
+    conn.commit()
+    cur.execute('SELECT * FROM db')
+    print(ID)
+    for row in cur:
+        print(row[4])
+        if row[4] == str(ID):
+            return row[0]
+
 def Gcheck(ID):
     conn = get_connection()
     cur = conn.cursor()
@@ -156,6 +182,29 @@ def seve2(ID,speaker,pitch,speed):
                 return
         #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
         cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=ID,speaker=speaker,pitch=pitch,speed=speed,text='hoge'))
+        conn.commit()
+        return
+    except Exception as e:
+        print (str(e))
+        return
+
+def seve3(ID,matti):
+    print(ID)
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("ROLLBACK")
+        conn.commit()
+        cur.execute('SELECT * FROM db')
+        for row in cur:
+            print(row[0])
+            if row[0] == str(ID):
+                print(row)
+                cur.execute('''UPDATE db SET id_ ='{ID}' WHERE text = '{text}';'''.format(text=ID,ID=matti))
+                conn.commit()
+                return
+        #cur.execute("UPDATE db SET name = '{name}' WHERE user_id='{user_id}';".format(name=ID2,user_id=ID+'Ms'))
+        cur.execute("insert into db values('{ID_}','{speaker}','{pitch}','{speed}','{text}')".format(ID_=matti,speaker='hoge',pitch='hoge',speed='hoge',text=ID))
         conn.commit()
         return
     except Exception as e:
@@ -230,11 +279,21 @@ async def on_message(message):
             await bot.process_commands(message)
             return
         Vcheck(message.author.id,message.content,message.author)
-        ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
-        try:
-            voice_client.play(ffmpeg_audio_source)
-        except:
-            await bot.process_commands(message)
+        matti = Mcheck2(message.channel.id)
+        if matti == 'mtrue':
+            mattilist = Mcheck()
+            for id in mattilist:
+                ffmpeg_audio_source = discord.FFmpegPCMAudio(str(id)+".mp3")
+                try:
+                    voice_client.play(ffmpeg_audio_source)
+                except:
+                    await bot.process_commands(message)
+        else:
+            ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
+            try:
+                voice_client.play(ffmpeg_audio_source)
+            except:
+                await bot.process_commands(message)
     await bot.process_commands(message)
 
 @bot.command(aliases=["connect","come"]) #connectやsummonでも呼び出せる
@@ -275,6 +334,18 @@ async def stop(ctx):
     """読み上げを停止します"""
     seve(ctx.channel.id,'false')
     await ctx.send("読み上げを停止します")
+
+@bot.command()
+async def mattion(ctx):
+    """読み上げを開始します"""
+    seve3(ctx.channel.id,'mtrue')
+    await ctx.send("マッチ読み上げを開始します。自動読み上げがオフの場合は別コマンドで起動してください。")
+
+@bot.command()
+async def mattioff(ctx):
+    """読み上げを停止します"""
+    seve3(ctx.channel.id,'mfalse')
+    await ctx.send("マッチ読み上げを停止します。自動読み上げがオンの場合は別コマンドで停止してください。")
 
 @bot.command()
 async def t(ctx,left : str, right : str):
