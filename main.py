@@ -313,7 +313,7 @@ async def on_message(message):
                     voice_client = id
                     try:
                         voice_client.play(ffmpeg_audio_source)
-                        time.sleep(0.5)
+                        time.sleep(3)
                     except:
                         await bot.process_commands(message)
         else:
