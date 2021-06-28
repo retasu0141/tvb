@@ -5,7 +5,7 @@ import requests
 import os
 
 import psycopg2
-import random
+import random,time
 
 bot = commands.Bot(command_prefix="_",activity=discord.Game("_help でコマンド確認！"))
 bot.remove_command('help')
@@ -313,6 +313,7 @@ async def on_message(message):
                     voice_client = id
                     try:
                         voice_client.play(ffmpeg_audio_source)
+                        time.sleep(0.5)
                     except:
                         await bot.process_commands(message)
         else:
@@ -364,13 +365,13 @@ async def stop(ctx):
     await ctx.send("読み上げを停止します")
 
 @bot.command()
-async def mattion(ctx):
+async def matchingon(ctx):
     """読み上げを開始します"""
     seve3(ctx.message.guild.voice_client,'mtrue')
     await ctx.send("マッチ読み上げを開始します。自動読み上げがオフの場合は別コマンドで起動してください。")
 
 @bot.command()
-async def mattioff(ctx):
+async def matchingoff(ctx):
     """読み上げを停止します"""
     seve3(ctx.message.guild.voice_client,'mfalse')
     await ctx.send("マッチ読み上げを停止します。自動読み上げがオンの場合は別コマンドで停止してください。")
@@ -420,7 +421,10 @@ async def help(ctx):
     embed.add_field(name="_s",value="話者(1～6)ピッチ(50～200)スピード(50～400)を数字で入力し、声を変更します")
     embed.add_field(name="_s の例",value="_s 1 100 150 : 自分のテキスト読み上げの声を 話者1,ピッチ100,速度150 に設定します")
     embed.add_field(name="_r",value="話者,ピッチ,スピードをランダムで決定します")
+    embed.add_field(name="_matchingon",value="matchingモードを有効にしている全てのサーバーに自動読み上げ音声を流します。")
+    embed.add_field(name="_matchingoff",value="matchingモードを停止します")
     embed.add_field(name="更新情報(2021/6/28)",value="コマンドの先頭につける記号が「!」から「_」になりました。自動読み上げ時にコマンドを読み上げなくさせ、名前読み上げ機能を付けました。")
+    embed.add_field(name="更新情報(2021/6/28)2",value="マッチング機能をつけました。これにより知らない人とコミュニケーションが取れるようになります。")
     await ctx.send(embed=embed)
 
 
