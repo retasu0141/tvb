@@ -109,6 +109,7 @@ def Mcheck():
         print(row[0])
         if row[0] == 'mtrue':
             list.append(row[4])
+    print(list)
     return list
 
 def Mcheck2(ID):
@@ -281,10 +282,12 @@ async def on_message(message):
         Vcheck(message.author.id,message.content,message.author)
         matti = Mcheck2(message.channel.id)
         if matti == 'mtrue':
+            print("m_start")
             mattilist = Mcheck()
+            ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
             for id in mattilist:
+                print(id)
                 voice_client = id
-                ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
                 try:
                     voice_client.play(ffmpeg_audio_source)
                 except:
