@@ -10,7 +10,7 @@ import random
 bot = commands.Bot(command_prefix="_",activity=discord.Game("_help でコマンド確認！"))
 bot.remove_command('help')
 token = os.environ['DISCORD_BOT_TOKEN']
-
+matti_data = {}
 '''
 if not discord.opus.is_loaded():
     #もし未ロードだったら
@@ -98,6 +98,9 @@ def Vcheck(ID,v_text,name):
     return #ID,speaker,pitch,speed
 
 def Mcheck():
+    id_list = [id for id, v in matti_data.items() if v == 'mtrue']
+    return id_list
+    """
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("ROLLBACK")
@@ -111,8 +114,11 @@ def Mcheck():
             list.append(row[4])
     print(list)
     return list
-
+    """
 def Mcheck2(ID):
+    matti = matti_data[ID]
+    return matti
+    """
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("ROLLBACK")
@@ -123,6 +129,7 @@ def Mcheck2(ID):
         print(row[4])
         if row[4] == str(ID):
             return row[0]
+    """
 
 def Gcheck(ID):
     conn = get_connection()
@@ -190,6 +197,9 @@ def seve2(ID,speaker,pitch,speed):
         return
 
 def seve3(ID,matti):
+    global matti_data
+    matti_data[ID] = matti
+    """
     print(ID)
     try:
         conn = get_connection()
@@ -211,7 +221,7 @@ def seve3(ID,matti):
     except Exception as e:
         print (str(e))
         return
-
+    """
 def voicetext(text,speaker_number):
 	#print(speaker_number)
 	url = 'https://api.voicetext.jp/v1/tts'
