@@ -296,7 +296,7 @@ async def on_message(message):
             await bot.process_commands(message)
             return
         Vcheck(message.author.id,message.content,message.author)
-        matti = Mcheck2(message.channel.id)
+        matti = Mcheck2(message.guild.voice_client)
         if matti == 'mtrue':
             print("m_start")
             mattilist = Mcheck()
