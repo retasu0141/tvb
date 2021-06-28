@@ -198,7 +198,7 @@ def seve3(ID,matti):
         cur.execute('SELECT * FROM db')
         for row in cur:
             print(row[0])
-            if row[0] == str(ID):
+            if row[0] == str(matti):
                 print(row)
                 cur.execute('''UPDATE db SET id_ ='{ID}' WHERE text = '{text}';'''.format(text=ID,ID=matti))
                 conn.commit()
