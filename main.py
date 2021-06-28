@@ -271,7 +271,7 @@ async def on_message(message):
     if message.author.bot:
         return
     print('Gcheck')
-    voice_client = message.guild.voice_client
+    #voice_client = message.guild.voice_client
     text = Gcheck(message.channel.id)
     print(text)
     if text == 'true':
@@ -283,12 +283,14 @@ async def on_message(message):
         if matti == 'mtrue':
             mattilist = Mcheck()
             for id in mattilist:
-                ffmpeg_audio_source = discord.FFmpegPCMAudio(str(id)+".mp3")
+                voice_client = id
+                ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
                 try:
                     voice_client.play(ffmpeg_audio_source)
                 except:
                     await bot.process_commands(message)
         else:
+            voice_client = message.guild.voice_client
             ffmpeg_audio_source = discord.FFmpegPCMAudio(str(message.author.id)+".mp3")
             try:
                 voice_client.play(ffmpeg_audio_source)
@@ -338,13 +340,13 @@ async def stop(ctx):
 @bot.command()
 async def mattion(ctx):
     """読み上げを開始します"""
-    seve3(ctx.channel.id,'mtrue')
+    seve3(ctx.guild.voice_client,'mtrue')
     await ctx.send("マッチ読み上げを開始します。自動読み上げがオフの場合は別コマンドで起動してください。")
 
 @bot.command()
 async def mattioff(ctx):
     """読み上げを停止します"""
-    seve3(ctx.channel.id,'mfalse')
+    seve3(ctx.guild.voice_client,'mfalse')
     await ctx.send("マッチ読み上げを停止します。自動読み上げがオンの場合は別コマンドで停止してください。")
 
 @bot.command()
