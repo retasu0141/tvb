@@ -77,7 +77,8 @@ def Vcheck(ID,v_text,name):
     print(str(name))
     str_name = str(name)
     print(str_name.split('#')[0])
-    text = str_name.split('#')[0] + "さん。" + v_text
+    #text = str_name.split('#')[0] + "さん。" + v_text
+    text = v_text
     print(text)
     conn = get_connection()
     cur = conn.cursor()
@@ -423,8 +424,6 @@ async def help(ctx):
     embed.add_field(name="_r",value="話者,ピッチ,スピードをランダムで決定します")
     embed.add_field(name="_matchingon",value="matchingモードを有効にしている全てのサーバーに自動読み上げ音声を流します。")
     embed.add_field(name="_matchingoff",value="matchingモードを停止します")
-    embed.add_field(name="更新情報(2021/6/28)",value="コマンドの先頭につける記号が「!」から「_」になりました。自動読み上げ時にコマンドを読み上げなくさせ、名前読み上げ機能を付けました。")
-    embed.add_field(name="更新情報(2021/6/28)2",value="マッチング機能をつけました。これにより知らない人とコミュニケーションが取れるようになります。")
     await ctx.send(embed=embed)
 
 
